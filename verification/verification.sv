@@ -130,15 +130,12 @@ cp_start: coverpoint vif.start;
    cp_cu_lay: coverpoint vif.cu_lay{
     bins rst_lay1 ={rst_lay};
     bins l1_cp={l1};
-    ignore_bins l2_cp={l2};
     bins rst1_path=(rst_lay => l1);
   }
  cp_cu_op: coverpoint vif.cu_op{
     bins rst_op1={rst_op};
     bins conv_cp={conv};
     bins max_pool_cp={max_pool};
-    ignore_bins relu_cp={relu};
-    ignore_bins o_store_cp={o_store};
     bins rst2_path=(rst_op => conv);
     bins conv_path=(conv => max_pool);
     
