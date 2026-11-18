@@ -41,7 +41,7 @@ sub-operation  rst_subop ->  al  ->  wl  ->  mac
 
 ## Verification
 
-I checked the design with SystemVerilog Assertions and simulation, and reached **100% functional coverage**. The assertions check [add the 2 or 3 properties you actually wrote, for example FSM state sequencing, `stop` only after pooling, or reset behaviour].
+I checked the design with SystemVerilog Assertions and simulation, and reached **100% functional coverage**. 
 
 ## Limitations
 
