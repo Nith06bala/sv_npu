@@ -49,4 +49,4 @@ This is a functional and timing model, built to study FSM control and cycle-accu
 
 ---
 
-Nithish Kanna B | B.Tech (VLSI Design Technology), SASTRA Deemed University
+Nithish Kanna B 
