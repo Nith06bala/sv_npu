@@ -4,14 +4,6 @@ A small neural processing unit in SystemVerilog that runs one convolutional laye
 
 I built it to study how a CNN accelerator moves data cycle by cycle: how the control FSM sequences loading, computing and pooling, and how weight reuse and zero-skipping cut memory traffic and switching activity.
 
-```
- activations (16) --+
-                    +--> [ PE 1 ] --+
- weights (3 x 3) ---+--> [ PE 2 ] --+--> ReLU + max-pool --> output memory
-                    +--> [ PE 3 ] --+
-                         (MAC)
-```
-
 ## What it does
 
 - Network: 1 convolution layer, 3 filters, kernel size 3, stride 1
