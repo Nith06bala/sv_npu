@@ -15,21 +15,21 @@ I built it to study how a CNN accelerator moves data cycle by cycle: how the con
 
 The FSM has three levels. The top level picks the layer, the middle level picks the operation, and the bottom level picks what is happening right now.
 
-```
+
 layer          rst_lay   ->  l1
 operation      rst_op    ->  conv   ->  max_pool
 sub-operation  rst_subop ->  al  ->  wl  ->  mac
-```
 
-`al` loads activations, `wl` loads weights, and `mac` does the multiply-accumulate. While reset is asserted, all three levels sit in their reset states. When reset is released and `start` goes high, the NPU begins. When pooling is done, it raises `stop`.
+
+al loads activations, wl loads weights, and mac does the multiply-accumulate. While reset is asserted, all three levels sit in their reset states. When reset is released and start goes high, the NPU begins. When pooling is done, it raises stop.
 
 ## How the compute works
 
-**Weights stay put.** In the `mac` step, each PE gets the weights of its own filter. Activations are loaded over the first three clock cycles. After that, the weights are held fixed and the activations slide through one position at a time with a window of three. Each activation is loaded once and reused across the window, instead of being fetched again for every output.
+**Weights stay put.** In the mac step, each PE gets the weights of its own filter. Activations are loaded over the first three clock cycles. After that, the weights are held fixed and the activations slide through one position at a time with a window of three. Each activation is loaded once and reused across the window, instead of being fetched again for every output.
 
 **Zero-skipping.** Each PE checks its two inputs before multiplying. If the weight or the activation is zero, the multiplication is skipped and the PE returns zero directly. This saves switching activity and power when the data is sparse, which is common after ReLU.
 
-**ReLU and max-pool in one stage.** In `max_pool`, two successive MAC outputs are compared after ReLU and the larger one is written back to the memory location that held the MAC result. No separate storage is needed for the pooled output.
+**ReLU and max-pool in one stage.** In max_pool, two successive MAC outputs are compared after ReLU and the larger one is written back to the memory location that held the MAC result. No separate storage is needed for the pooled output.
 
 ## Verification
 
