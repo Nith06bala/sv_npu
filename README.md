@@ -37,7 +37,7 @@ I checked the design with SystemVerilog Assertions and simulation, and reached *
 
 ## Limitations
 
-This is a functional and timing model, built to study FSM control and cycle-accurate data movement. It has not been trained, and it has not been tested against real ECG or other AI data. It is not benchmarked for classification accuracy.
+This is a functional and timing model, built to study FSM control and cycle-accurate data movement. It has not been trained, and it has not been tested against real AI data. It is not benchmarked for classification accuracy.
 
 ---
 
